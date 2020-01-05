@@ -1,25 +1,31 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-var UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: false
+var UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: false
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String
+    },
+    created_on: {
+      type: Date,
+      default: Date.now
+    }
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String
-  },
-  created_on: {
-    type: Date,
-    default: Date.now
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
   }
-});
+);
 
 // Expand on LinksSchema
 UserSchema.virtual('links', {
@@ -35,9 +41,6 @@ UserSchema.methods.generateHash = function(password) {
 UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
-
-UserSchema.set('toObject', { virtuals: true });
-UserSchema.set('toJSON', { virtuals: true });
 
 const User = mongoose.model('User', UserSchema);
 
