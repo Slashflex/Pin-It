@@ -29,5 +29,8 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.4",
     "valid-url": "^1.0.9"
+  },
+  "engines": {
+    "node": "^12"
   }
 }
