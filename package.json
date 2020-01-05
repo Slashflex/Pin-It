@@ -1,0 +1,33 @@
+{
+  "name": "pinit",
+  "version": "1.0.0",
+  "description": "Launchpad for quickly accessing favorite links. Unlimited links unlike Google Chrome.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slashflex/PinIt.git"
+  },
+  "author": "David Saoud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Slashflex/PinIt/issues"
+  },
+  "homepage": "https://github.com/Slashflex/PinIt#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.8.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4",
+    "valid-url": "^1.0.9"
+  }
+}
