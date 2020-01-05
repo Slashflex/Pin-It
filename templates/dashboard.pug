@@ -1,0 +1,74 @@
+//- include partials/_header
+//-   body
+extends base
+block content
+  br
+  nav.navbar.navbar-light
+    h2
+      span.username= `${user.username}'s`
+      |  Pins
+    form.form-inline
+      a.btn.mr-2.btn-outline-info.btn-sm(href="" role="button" data-toggle="modal" data-target="#addLinkModal")
+        i.fa.fa-plus-circle(aria-hidden="true")  Link
+      a.btn.mr-2.btn-outline-danger.btn-sm(href="/logout" role="button")
+        i.fa.fa-sign-out(aria-hidden="true")  Logout
+      a.btn.mr-2.btn-outline-danger.btn-sm(href="" role="button" data-toggle="modal" data-target="#deleteProfile")
+        i.fa.fa-trash(aria-hidden="true")  Profile
+     
+    //- button.btn.btn-success(type="button" aria-label="Left Align")
+    //-   span.fa.fa-align-left(aria-hidden="true")  adds
+  hr
+  .row
+    .col-md-12
+      .card-columns
+        each card in cards
+          .card.shadow.p-3.mb-3.bg-white.rounded
+            if card.imageB64
+              img.card-img-top(src=`${card.imageB64}` alt="Card image cap")
+            
+            .card-body
+              h4.card-title= card.name
+                hr
+                p.card-text= card.description
+                hr
+                .btn-wrapper.text-center
+                  a#linkVal.btn.btn-brand.btn-outline-info.btn-m(href=`${card.link}` target="_blank")
+                    i.fa.fa-external-link(aria-hidden="true" onclick=`deleteLink(${card}`)  Open
+                  button.deleteLink.btn.btn-brand.btn-outline-danger.btn-m(type="button" name=`${card.link}`)
+                    i.fa.fa-trash(aria-hidden="true")  Link
+
+  #addLinkModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="Add new Link" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered(role="document")
+      .modal-content
+        form.submitForm.text-center.border.border-light.p-5
+          h3.mb-4(style="font-weight: bold; color: #17a2b8;") Add new link
+          input#pageLink.form-control(type="text" name="link" placeholder="Link" required="")
+          small#passwordHelpBlock.help-text.form-text.text-muted.mb-4
+            | Enter the link of the website
+          input#pageName.form-control.mb-4(type="text" name="name" placeholder="Name" required="")
+          small#passwordHelpBlock.help-text.form-text.text-muted.mb-4
+            | Enter the name of the website
+          .form-group
+            textarea#pageDescription.form-control.rounded-0(name="description" rows="3" placeholder="Description")
+            small#passwordHelpBlock.help-text.form-text.text-muted.mb-4
+              | Enter the description of the website (Optional)
+          .custom-file
+            input#pageImage.custom-file-input(type="file" name="imageB64" placeholder="Choose cover image")
+            label.custom-file-label.help-text(for="pageImage")
+            small#passwordHelpBlock.help-text.form-text.text-muted.mb-4
+              | Provide a cover image (Optional)
+          button.btn.btn-info.btn-block.my-4(type="submit") Add
+          small#linkAddError.form-text.mb-4
+  #deleteProfile.modal.fade(tabindex="-1" role="dialog" aria-labelledby="Delete Profile" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered(role="document")
+      .modal-content
+        form.text-center.border.border-light.p-5(action="/deleteUserProfile" method="POST")
+          h3.mb-4(style="font-weight: bold; color: #17a2b8;") Delete Profile
+          .form-group.mb-4
+            p.mb-4(style="font-size: medium; ")
+              | This will delete your profile and along with
+              | that the links that you have saved. This is an irreversible process. Do you want to
+              | continue ?
+          button.btn.btn-sm.btn-danger.mr-1(type="submit")
+            | Delete
+          button.btn.btn-sm.btn-info(type="button" data-dismiss="modal" aria-label="Close") Cancel
