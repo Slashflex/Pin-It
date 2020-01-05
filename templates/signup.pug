@@ -1,0 +1,22 @@
+extends base
+block content
+  #signupModal.modal.fade(data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="Sign Up" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered(role="document")
+      .modal-content
+        form.signupForm.text-center.border.border-light.p-5(action="/signup" method="post")
+          h3.mb-4(style="font-weight: bold; color: #17a2b8;") Sign Up
+          input#username.form-control(type="text" name="username" placeholder="Username" required="")
+          small#helpTextBlock.help-text.form-text.text-muted.mb-4
+            | Enter your username
+          input#email.form-control(type="text" name="email" placeholder="Email" required="")
+          small#helpTextBlock.help-text.form-text.text-muted.mb-4
+            | Enter your Email
+          input#password.form-control(type="password" name="password" placeholder="Password" required="")
+          small#helpTextBlock.help-text.form-text.text-muted.mb-4
+            | Enter your password
+          button.btn.btn-info.btn-block(type="submit") Sign Up
+          small#loginLink.help-text.form-text.text-muted.mb-4
+            | Already a member ? 
+            a(href="/login") Login
+          if errorMessage
+            small#error-message.form-text.mb-4= errorMessage
