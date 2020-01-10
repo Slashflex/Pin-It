@@ -130,7 +130,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
     });
   }
   // Error if image size is more than 5 mb
-  let imageSize = new Buffer(payload.imageB64, 'base64').length;
+  let imageSize = Buffer.alloc(payload.imageB64, 'base64').length;
   if (imageSize / 1e6 > 5) {
     return res.send({
       errorMessage: 'Use an image smaller than 5 mb.'
