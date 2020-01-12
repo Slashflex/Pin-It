@@ -13,7 +13,7 @@ This application will provide you a homepage for quickly accessing your favorite
 
 Set the application as your homepage :)
 
-![alt text](https://github.com/Slashflex/Pin-It/public/img/pinIt.png "Preview")
+![alt text](https://github.com/Slashflex/Pin-It/blob/master/public/img/pinIt.png "Preview")
 
 
 ## Usage
